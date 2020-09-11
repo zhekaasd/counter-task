@@ -1,0 +1,91 @@
+/*стилизация дисплея при некоректном значении счётчика*/
+.active {
+    font-size: 25px;
+    color: deeppink;
+    font-weight: bold;
+}
+
+
+/*------------- стилизация настроек счётчика -------------*/
+.settingCounter {
+    /*    padding: 10px 20px;*/
+    width: 250px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.settingCounter span, input {
+    margin: 3px 0;
+}
+
+.settingCounter span {
+    color: white;
+}
+
+.defaultStyle {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+/*стилизация счётчика  "input" и "span" */
+
+.spanInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*стилизация настроек счётчика при некоректном значении счётчика: "input" и "span" */
+.activeStyle  {
+    font-weight: bold;
+    color: darkred;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.activeStyle input {
+    border: 1px solid darkred;
+    background-color: pink;
+    color: darkred;
+    font-weight: bold;
+}
+
+.activeStyle span {
+    color: darkred;
+    margin-bottom: 3px;
+}
+
+.activeStyleDefault input {
+    width: 170px;
+}
+
+
+/*.settingsWrapper{
+    border: 2px solid #6CE4F9;
+
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 10px;
+    background: black;
+}*/
+
+
+
+/*стилизация кнопки в настройках счётчика*/
+
+
+
+
+
+.settingCounter button {
+    margin: 10px 0;
+}
