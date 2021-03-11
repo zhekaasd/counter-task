@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import '../components/Settings.css';
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../redux/store";
@@ -15,23 +15,54 @@ type SettingsCounterPropsType = {
 }
 
 
-const SettingsCounter = React.memo( (props: SettingsCounterPropsType) => {
+const SettingsCounter: React.FC<SettingsCounterPropsType> = React.memo ((props: SettingsCounterPropsType) => {
 
 //обращаемся к нашему стейту с помощью хука 'useSelector' и достаем нужные нам данные
     let counterState = useSelector<AppRootStateType, InitialType>(state => state.counterSettings);
 
 
+    useEffect(() => {
+        let valueAsStringMin = localStorage.getItem('counterValueMin');
+        if (valueAsStringMin) {
+            let currentValueMin = JSON.parse(valueAsStringMin);
+            props.stateValueMin(currentValueMin);
+        }
+    }, []);
+
+
+    useEffect(() => {
+        let valueAsStringMax = localStorage.getItem('counterValueMax');
+        if (valueAsStringMax) {
+            let currentValueMax = JSON.parse(valueAsStringMax);
+            props.stateValueMax(currentValueMax);
+        }
+    }, []);
+
+
+    useEffect(() => {
+        //localStorage.setItem('counterValueMin', JSON.stringify(counterState.min));
+        localStorage.setItem('counterValueMax', JSON.stringify(counterState.max));
+    }, [counterState.max]);
+
+
+    useEffect(() => {
+        //localStorage.setItem('counterValueMin', JSON.stringify(counterState.min));
+        localStorage.setItem('counterValueMin', JSON.stringify(counterState.min));
+    }, [counterState.min]);
+
+
+
 //считывает минимальное значение из инпута,переводит его из строки в число и сетает в "глобальный" стейт
     let changeValueMin = (e: ChangeEvent<HTMLInputElement>) => {
-        let asdf = Number(e.currentTarget.value);
-        props.stateValueMin(asdf);
+        let counterValueMin = JSON.parse(e.currentTarget.value);
+        props.stateValueMin(counterValueMin);
     }
 
 
 //считывает максимальное значение из инпута,переводит его из строки в число и сетает в "глобальный" стейт
     let changeValueMax = (e: ChangeEvent<HTMLInputElement>) => {
-        let asdf = Number(e.currentTarget.value);
-        props.stateValueMax(asdf);
+        let counterValueMax = JSON.parse(e.currentTarget.value);
+        props.stateValueMax(counterValueMax);
     }
 
 //"сетает" минимальное значения в качестве значения счётчика
@@ -42,7 +73,7 @@ const SettingsCounter = React.memo( (props: SettingsCounterPropsType) => {
 
 //стилизая "деоктивации" кнопки, которая сохраняет значение в стейт и активирует счётчик
     const setDisableStyle = counterState.editMode || counterState.max === counterState.min || counterState.min < 0 ? 'buttonLowOpacity' : 'buttonNormal';
-//правила "деоктивации" кнопки "set"
+//правила "деактивации" кнопки "set"
     const disableSettingSet = (counterState.min === counterState.max || counterState.min < 0 || counterState.max === 0) ? !counterState.set : counterState.set;
 
     return (
@@ -54,7 +85,7 @@ const SettingsCounter = React.memo( (props: SettingsCounterPropsType) => {
             </div>
         </div>
     )
-} );
+});
 
 
 export default SettingsCounter;

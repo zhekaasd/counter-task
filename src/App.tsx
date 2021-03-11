@@ -4,20 +4,12 @@ import './App.css';
 import CounterDisplay from "./components/CounterDisplay";
 import SettingsCounter from "./components/SettingsCounter";
 import {useDispatch} from "react-redux";
-import {
-  changeValueAC,
-  resetValueAC,
-  setChangedValueAC,
-  setValueMaxAC,
-  setValueMinAC
-} from "./redux/counter-reducer";
+import {changeValueAC, resetValueAC, setChangedValueAC, setValueMaxAC, setValueMinAC} from "./redux/counter-reducer";
 import ControlButtonCounter from './components/ControlButtonCounter';
 
 
-
-function App() {
-
-//  const counterSettings = useSelector<AppRootStateType, InitialStateType>(state => state.counterSettings);
+const App = React.memo( () => {
+//const counterState = useSelector<AppRootStateType, InitialType>(state => state.counterSettings);
   const dispatch = useDispatch();
 
 
@@ -41,12 +33,11 @@ function App() {
     dispatch(setValueMaxAC(valueMax));
   }, [dispatch] );
 
+
 //функция добавляющая считанные значения и активирующая счётчик
   const setChangedValue = useCallback ( (valueVs: number) => {
     dispatch(setChangedValueAC(valueVs));
   }, [dispatch] );
-
-
 
   return (
       <div className='appWrapper'>
@@ -63,7 +54,7 @@ function App() {
         </div>
       </div>
   )
-}
+})
 
 
 export default App;

@@ -1,4 +1,3 @@
-
 export type InitialType = {
     max: number,
     min: number,
@@ -6,7 +5,8 @@ export type InitialType = {
     inc: boolean,
     reset: boolean,
     set: boolean,
-    editMode: boolean
+    editMode: boolean,
+    inputValue: number
 }
 
 
@@ -43,12 +43,14 @@ export type SetChangedValueActionType = {
 const initialState:InitialType = {
     max: 1,
     min: 0,
+    inputValue: 0,
     value: 0,
     inc: true,
     reset: true,
     set: false,
     editMode: false
 };
+
 
 
 export const counterReducer = (state: InitialType = initialState, action: ActionsType): InitialType => {
@@ -80,21 +82,14 @@ export const counterReducer = (state: InitialType = initialState, action: Action
         }
 
         case "SET-VALUE-MIN": {
-            let stateCopy = {...state};
-
-            return {...stateCopy, min: action.valueMin, reset: true, inc: true, editMode: false, value: action.valueMin, set: false}
+            return {...state, min: action.valueMin, reset: true, inc: true, editMode: false, set: false};
         }
 
         case "SET-VALUE-MAX": {
-            let stateCopy = {...state};
-
-            return {...stateCopy, max: action.valueMax, reset: true, inc: true, editMode: false, set: false}
+            return {...state, max: action.valueMax, reset: true, inc: true, editMode: false, set: false};
         }
-
         case "SET-CHANGED-VALUE": {
-            let stateCopy = {...state};
-
-            return {...stateCopy, value: action.valueVs, inc: false, editMode: true, reset: true, set: true};
+            return {...state, value: action.valueVs, inc: false, editMode: true, reset: true, set: true};
         }
 
         default:

@@ -8,14 +8,9 @@ import {
 } from "./counter-reducer";
 
 
-let startState: InitialType = {
-    max: 1,
-    min: 0,
-    value: 0,
-    inc: true,
-    reset: true,
-    set: false,
-    editMode: false};
+let startState: InitialType;
+
+
 beforeEach(() => {
     startState = {
         max: 15,
@@ -24,7 +19,8 @@ beforeEach(() => {
         inc: true,
         reset: true,
         set: false,
-        editMode: false
+        editMode: false,
+        inputValue: 0
     }
 });
 

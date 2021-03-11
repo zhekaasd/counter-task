@@ -12,15 +12,13 @@ type CounterValueSettingsPropsType = {
 
 }
 
-export function CounterValueSettings(props: CounterValueSettingsPropsType) {
+export const CounterValueSettings = React.memo((props: CounterValueSettingsPropsType) => {
 
 //обращаемся к нашему стейту с помощью хука 'useSelector' и достаем нужные нам данные
     let counterState = useSelector<AppRootStateType, InitialType>(state => state.counterSettings);
 
 //стилизация инпута, для некоректно введенных сначений счётчика
     let compare = (counterState.max === counterState.min || counterState.min < 0) ? 'activeStyle' : 'defaultStyle';
-
-
 
     return <div>
         <div className={compare}>
@@ -33,4 +31,4 @@ export function CounterValueSettings(props: CounterValueSettingsPropsType) {
             />
         </div>
     </div>
-}
+});
