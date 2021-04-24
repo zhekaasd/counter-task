@@ -4,7 +4,7 @@ export type InitialType = {
     value: number,
     inc: boolean,
     reset: boolean,
-    set: boolean,
+    setSetting: boolean,
     editMode: boolean,
     inputValue: number
 }
@@ -47,7 +47,7 @@ const initialState:InitialType = {
     value: 0,
     inc: true,
     reset: true,
-    set: false,
+    setSetting: false,
     editMode: false
 };
 
@@ -64,7 +64,7 @@ export const counterReducer = (state: InitialType = initialState, action: Action
                         }*/
             counter >= stateCopy.max ? stateCopy.inc = true : stateCopy.inc = false;
 
-            return {...stateCopy, reset: false, set: true, value: counter};
+            return {...stateCopy, reset: false, setSetting: true, value: counter};
             /*            stateCopy.reset = false;
                         stateCopy.set = true;
                         stateCopy.value = counter;
@@ -82,14 +82,14 @@ export const counterReducer = (state: InitialType = initialState, action: Action
         }
 
         case "SET-VALUE-MIN": {
-            return {...state, min: action.valueMin, reset: true, inc: true, editMode: false, set: false};
+            return {...state, min: action.valueMin, reset: true, inc: true, editMode: false, setSetting: false};
         }
 
         case "SET-VALUE-MAX": {
-            return {...state, max: action.valueMax, reset: true, inc: true, editMode: false, set: false};
+            return {...state, max: action.valueMax, reset: true, inc: true, editMode: false, setSetting: false};
         }
         case "SET-CHANGED-VALUE": {
-            return {...state, value: action.valueVs, inc: false, editMode: true, reset: true, set: true};
+            return {...state, value: action.valueVs, inc: false, editMode: true, reset: true, setSetting: true};
         }
 
         default:

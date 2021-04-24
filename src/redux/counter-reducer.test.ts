@@ -18,7 +18,7 @@ beforeEach(() => {
         value: 10,
         inc: true,
         reset: true,
-        set: false,
+        setSetting: false,
         editMode: false,
         inputValue: 0
     }
@@ -32,7 +32,7 @@ test('the counter should be correct and disabled "set" button', () => {
     expect(endState.value).toBe(11);
     expect(endState.inc).toBe(false);
     expect(endState.reset).toBe(false);
-    expect(endState.set).toBe(true);
+    expect(endState.setSetting).toBe(true);
 })
 
 
@@ -48,7 +48,7 @@ test('should be correct "set" min value and activated "set" button', () => {
     const endState = counterReducer(startState, setValueMinAC(666));
 
     expect(endState.min).toBe(666);
-    expect(endState.set).toBe(false);
+    expect(endState.setSetting).toBe(false);
     expect(endState.reset).toBe(true);
     expect(endState.inc).toBe(true);
 })
@@ -58,7 +58,7 @@ test('should be correct "set" max value and activated "set" button', () => {
     const endState = counterReducer(startState, setValueMaxAC(666));
 
     expect(endState.max).toBe(666);
-    expect(endState.set).toBe(false);
+    expect(endState.setSetting).toBe(false);
     expect(endState.reset).toBe(true);
     expect(endState.inc).toBe(true);
 })
@@ -70,5 +70,5 @@ test('should be correct set value in "state" and disable "set" button', () => {
     expect(endState.value).toBe(23);
     expect(endState.inc).toBe(false);
     expect(endState.reset).toBe(true);
-    expect(endState.set).toBe(true);
+    expect(endState.setSetting).toBe(true);
 })
