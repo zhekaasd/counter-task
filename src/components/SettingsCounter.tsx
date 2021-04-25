@@ -20,6 +20,12 @@ const SettingsCounter: React.FC<SettingsCounterPropsType> = React.memo ((props: 
 //обращаемся к нашему стейту с помощью хука 'useSelector' и достаем нужные нам данные
     let counterState = useSelector<AppRootStateType, InitialType>(state => state.counterSettings);
 
+/*--- Устанавливаем минимальное значение из настроек счётчика на экране при перезагрузке ---*/
+    useEffect( () => {
+        changedOnClickHandler();
+    }, [])
+
+/*
 
     useEffect(() => {
         let valueAsStringMin = localStorage.getItem('counterValueMin');
@@ -50,6 +56,7 @@ const SettingsCounter: React.FC<SettingsCounterPropsType> = React.memo ((props: 
         localStorage.setItem('counterValueMin', JSON.stringify(counterState.min));
     }, [counterState.min]);
 
+*/
 
 
 //считывает минимальное значение из инпута,переводит его из строки в число и сетает в "глобальный" стейт
@@ -71,10 +78,10 @@ const SettingsCounter: React.FC<SettingsCounterPropsType> = React.memo ((props: 
     }
 
 
-//стилизая "деоктивации" кнопки, которая сохраняет значение в стейт и активирует счётчик
+//стилизая "деактивации" кнопки, которая сохраняет значение в стейт и активирует счётчик
     const setDisableStyle = counterState.editMode || counterState.max === counterState.min || counterState.min < 0 ? 'buttonLowOpacity' : 'buttonNormal';
 //правила "деактивации" кнопки "set"
-    const disableSettingSet = (counterState.min === counterState.max || counterState.min < 0 || counterState.max === 0) ? !counterState.set : counterState.set;
+    const disableSettingSet = (counterState.min === counterState.max || counterState.min < 0 || counterState.max === 0) ? !counterState.setSetting : counterState.setSetting;
 
     return (
         <div className='settingCounter'>
